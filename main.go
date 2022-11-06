@@ -45,6 +45,12 @@ func main() {
 						Usage:   "Port of the Store",
 						Value:   "5000",
 					},
+					&cli.StringFlag{
+						Name:    "send-port",
+						Aliases: []string{"s"},
+						Usage:   "Port of the Store",
+						Value:   "50505",
+					},
 					&cli.IntFlag{
 						Name:    "delay",
 						Aliases: []string{"d"},
@@ -94,7 +100,8 @@ func main() {
 						}
 					}
 					port := cCtx.String("port")
-					send(ip, port, string(b))
+					sendPort := cCtx.String("send-port")
+					send(ip, sendPort, port, string(b))
 					return nil
 				},
 			},

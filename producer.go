@@ -5,9 +5,9 @@ import (
 	"net"
 )
 
-func send(ip, port, content string) {
+func send(ip, sendPort, port, content string) {
 
-	pc, err := net.ListenPacket("udp4", ":1234")
+	pc, err := net.ListenPacket("udp4", ":"+sendPort)
 	if err != nil {
 		panic(err)
 	}
