@@ -1,0 +1,28 @@
+version: "3"
+
+tasks:
+  sh:
+    desc: Format shellscripts
+    cmds:
+      - shfmt -w .
+  md:
+    desc: Formats Markdown with prettier
+    cmds:
+      - prettier -w "**/*.MD" "!vendor"
+      - prettier -w "**/*.md" "!vendor"
+    ignore_error: true
+
+  yaml:
+    desc: Formats YAML with prettier
+    cmds:
+      - prettier -w "**/*.yaml" "!vendor" "!**/*.tpl.yaml"
+      - prettier -w "**/*.yml" "!vendor" "!**/*.tpl.yml"
+
+  nix:
+    desc: Formats Nix files
+    cmds:
+      - nixpkgs-fmt .
+  go:
+    desc: Formats Go files
+    cmds:
+      - go fmt ./...

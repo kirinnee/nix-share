@@ -1,0 +1,51 @@
+version: "3"
+
+includes:
+  lint: ./scripts/lint.yml
+  fmt: ./scripts/fmt.yml
+  ci: ./scripts/ci.yml
+  ide: ./scripts/ide.yml
+
+tasks:
+  cfg:scripts:
+    run: once
+    desc: Configure Scripts to be executable
+    cmds:
+      - chmod -R +x ./scripts
+  setup:
+    desc: Setup
+    cmds:
+      - go mod tidy
+
+  run:client:
+    desc: Run client
+    cmds:
+      - go run . r -c "$(pwd)/ns-track.json"
+
+  run:send:
+    desc: Run send
+    cmds:
+      - go run . s --host $HOST "$(pwd)/public"
+
+  watch:tracker:
+    desc: Watch tracker JSON
+    cmds:
+      - watch -n 1 cat ./ns-track.json
+
+  watch:nix:conf:
+    desc: Watch NIX config
+    cmds:
+      - watch -n 1 cat ~/.config/nix/nix.conf
+
+  # Utility
+  lint:
+    desc: Run all linters
+    cmds:
+      - task: lint:sh
+  fmt:
+    desc: Run all formatters
+    cmds:
+      - task: fmt:sh
+      - task: fmt:md
+      - task: fmt:yaml
+      - task: fmt:nix

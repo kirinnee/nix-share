@@ -1,0 +1,19 @@
+version: "3"
+
+tasks:
+  sh:
+    desc: Lints shell scripts
+    cmds:
+      - shfmt -f . | xargs shellcheck
+  go:
+    desc: Lints go code
+    cmds:
+      - golangci-lint run
+  go:vet:
+    desc: Go vet
+    cmds:
+      - go vet ./...
+  go:cyclo:
+    desc: Cyclomatic Complexity
+    cmds:
+      - gocyclo -over 15 .

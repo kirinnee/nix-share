@@ -1,0 +1,19 @@
+version: "3"
+
+tasks:
+  status:
+    desc: Gets IDE status
+    cmds:
+      - goland-remote status .
+  start:
+    desc: Starts Goland Gateway IDE
+    cmds:
+      - tmux new -s "goland@$(pwd)" -d 'while true; do goland-remote run .; done'
+  enter:
+    desc: Access tmux session
+    cmds:
+      - tmux at -t "goland@$(pwd)"
+  stop:
+    desc: Stop Goland Gateway IDE
+    cmds:
+      - tmux kill-session -t "goland@$(pwd)"
