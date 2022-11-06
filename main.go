@@ -46,10 +46,9 @@ func main() {
 						Value:   "5000",
 					},
 					&cli.StringFlag{
-						Name:    "send-port",
-						Aliases: []string{"s"},
-						Usage:   "Port of the Store",
-						Value:   "50505",
+						Name:  "send-port",
+						Usage: "Port of the Store",
+						Value: "50505",
 					},
 					&cli.IntFlag{
 						Name:    "delay",
